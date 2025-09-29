@@ -170,9 +170,10 @@ class TestChessFunctions:
         def rules(self,*args):
             self.rules_called = True
         game.rules = rules.__get__(game)
+
         # Act
         game.move([0,1],[7,1])
-        game.move_num += 1
+        
         # Assert
         assert game.rules_called == True
 
@@ -181,8 +182,10 @@ class TestChessFunctions:
         def is_check(self,king_pos):
             self.is_check_called = True
         game.is_check = is_check.__get__(game)
+        
         # Act
         game.move([0,1],[7,1])
+        
         # Assert
         assert game.is_check_called == True
 
@@ -191,7 +194,9 @@ class TestChessFunctions:
         def is_checkmate(self,pos):
             self.is_checkmate_called = True
         game.checkmate = is_checkmate.__get__(game)
+        
         # Act
         game.move([0,1],[7,1])
+        
         # Assert
         assert game.is_checkmate_called == True
