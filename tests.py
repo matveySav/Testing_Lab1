@@ -20,12 +20,12 @@ class TestChessGame:
         result = GameMixin.translate_to_pos(algebraic)
         back_result = GameMixin.translate_to_str(expected_matrix)
         # Assert
-        assert result == expected_matrix, f"Failed for {algebraic}: expected{expected_matrix}, got {result}"
-        assert back_result == algebraic, f"Reverse failed for {expected_matrix}: expected {algebraic}, got {back_result}"
+        assert result == expected_matrix
+        assert back_result == algebraic
 
     @pytest.mark.parametrize("invalid_coord", ['', 'a', 'a9', 'i1', 'a0', 'a10', 'z5'])
     def test_translate_coordinates_invalid(self, invalid_coord):
-        # Act & Assert
+        # Act and Assert
         with pytest.raises(WrongMove):
             GameMixin.translate_to_pos(invalid_coord)
 
@@ -76,7 +76,6 @@ class TestChessGame:
         assert result == 0, "Moving empty square"
 
     def test_king_in_check_situation(self, game):
-        """Тест ситуации шаха королю"""
         # Arrange
         game.board[7][4] = Figure('king', 'white')  # e1
         game.board[0][4] = Figure('rook', 'black')  # e8
@@ -101,7 +100,6 @@ class TestChessGame:
             assert move in possible_moves
 
     def test_rules_invalid_move_wrong_turn(self, game):
-        """Тест правил для хода не в свою очередь"""
         # Arrange
         game.board[6][4] = Figure('pawn', 'white')  # e2
         game.board[1][4] = Figure('pawn', 'black')  # e7
